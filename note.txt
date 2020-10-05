@@ -1,0 +1,43 @@
+http://api.thetpainghtut.com/api/v1/posts
+
+
+POS Project
+	- Admin
+		- crud (staff,suppliers,category,brand)
+		- crud (items,stocks)
+
+	- Staff
+		- sale
+
+	- Report
+
+
+DS
+---
+1
+	- staff (crud)
+		- user
+		- user_id,phoneno,address.profile
+
+	- suppliers
+		- name,phoneno,address,logo
+	- categories
+		- name,photo
+	- brands
+		- name, photo
+
+2
+	- items
+		- codeno,name,supplier_id,category_id,brand_id,photo
+
+	- stock
+		- item_id,perprice,quantity,in_date
+
+
+3
+	- sales
+		- voucherno,total,sale_date,
+
+	- sale_detail (pivot)
+		- sale_id,item_id,qty
+
