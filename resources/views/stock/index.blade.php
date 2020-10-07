@@ -5,7 +5,7 @@
   <div class="card shadow mb-4">
     <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-primary">Stock List</h6>
-      <a href="{{route('stock.create')}}" class="btn btn-outline-success btn-sm float-right"><i class="fas fa-plus"></i>Add Item</a>
+      <a href="{{route('stock.create')}}" class="btn btn-outline-success btn-sm float-right"><i class="fas fa-plus"></i>Add Stock</a>
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -44,9 +44,9 @@
               <td>{{$row->in_date}}</td>
               <td>
                 <a href="{{route('stock.show',$row->id)}}" class="btn btn-primary"><i class="fas fa-eye"></i>Detail</a>
-                <a href="{{route('stock.edit',$row->id)}}" class="btn btn-warning">
+                {{-- <a href="{{route('stock.edit',$row->id)}}" class="btn btn-warning">
                   <i class="fas fa-tools">Edit</i>
-                </a>
+                </a> --}}
                 {{-- <form action="{{route('row.destroy',$row->id)}}" method="POST" class="d-inline-block" onsubmit="return confirm('Are you sure?')">
                   @csrf
                   @method('DELETE')

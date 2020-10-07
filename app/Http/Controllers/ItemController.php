@@ -178,6 +178,6 @@ class ItemController extends Controller
         $item->stock->delete();
         return redirect()->route('item.index');
 
-
     }
+
 }

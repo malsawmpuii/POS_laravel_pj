@@ -38,14 +38,36 @@ class StockController extends Controller
      */
     public function store(Request $request)
     {
-         /*$stock = new Stock;
-         $stock->item_id =$item->id;
+         //validation
+       /* $request->validate([
+            "item_id"=>"required",
+            "perprice"=>"required",
+            "quantity"=>"required",
+            "date" =>"required"
+        ]);
+
+         $stock = new Stock;
+         $stock->item_id =$request->item_id;
          $stock->perprice=$request->perprice;
          $stock->quantity=$request->quantity;
-         $stock->in_date=$request->date;
+         $stock->in_date=$request->date;*/
 
+        $stock = Stock::where([
+        ['item_id', '=', $request->item_id]
+        ])->first();
+         
+        $stock->perprice=$request->perprice;
+        $stock->quantity=$request->quantity;
+        $stock->in_date=$request->date;
+
+        if ($stock) {
+            $stock->increment('quantity', $request->quantity);
+        } else {
+            Stock::create($request->all());
+        }
          $stock->save();
-        */
+
+         return redirect()->route('stock.index');
     }
 
     /**
@@ -80,18 +102,16 @@ class StockController extends Controller
      */
     public function update(Request $request, Stock $stock)
     {
-        //validation
+        /*//validation
         $request->validate([
             "perprice"=>"required",
             "quantity"=>"required",
-            "in_date"=>"required"
+            "date"=>"required"
 
-        ]);
+        ]);*/
         
         //data store
-                
-         $stock = $item->stock;
-         $stock->item_id =$item->id;
+         $stock->item_id =$item->id;       
          $stock->perprice=$request->perprice;
          $stock->quantity=$request->quantity;
          $stock->in_date=$request->date;
@@ -113,18 +133,12 @@ class StockController extends Controller
     {
         //
     }
-     /*public function getitem(Request $request)
+     public function getitem(Request $request)
     {
+        //dd($request);
         $codeno = $request->codeno;
-        $item = Item::where('codeno',$codeno)->get();
-        return $item;
-    }*/
-
-    public function getitem(Request $request)
-    {
-        $stock = $item->stock;
-        $item->codeno = $request->codeno;
-        $item = Item::find($codeno);
+        $item = Item::where('codeno',$codeno)->first();
         return $item;
     }
+
 }

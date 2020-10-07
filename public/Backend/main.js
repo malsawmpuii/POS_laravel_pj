@@ -1,10 +1,9 @@
 $(document).ready(function(){
 
-	cartNoti();
 	showTable();
 	
-
-	$('.addSaleBtn').on('click', function(){
+	$('.SaleBtn').on('click', function(){
+		alert('allert')
 		var id = $(this).data('id');
 		var name = $(this).data('name');
 		var codeno = $(this).data('codeno');
@@ -43,40 +42,14 @@ $(document).ready(function(){
 
 		var saleData = JSON.stringify(saleArray);
 		localStorage.setItem("sale",saleData);
-
-		cartNoti();
 	});
-
-	function cartNoti(){
-		var sale = localStorage.getItem('sale');
-		if (sale) {
-			var saleArray = JSON.parse(sale);
-			var total =0;
-			var noti = 0;
-			$.each(saleArray, function(i,v){
-
-				var perprice = v.perprice;
-				var quantity = v.quantity;
-				
-				var total = perprice * quantity;
-
-				noti += quantity ++;
-			})
-			$('.shoppingcartNoti').html(noti);
-			$('.salecartTotal').html(CommaFormatted(total.toString())+' Ks');
-		}
-		else{
-			$('.shoppingcartNoti').html(0);
-			$('.salecartTotal').html(0+' Ks');
-		}
-	}
 
 	function showTable(){
 		var sale = localStorage.getItem('sale');
 
 		if (sale) {
-			$('.salecart_div').show();
-			$('.nosalecart_div').hide();
+			$('.mySaleList').show();
+			$('.nosalelist').hide();
 
 			var saleArray = JSON.parse(sale);
 			var salecartData='';
@@ -95,20 +68,21 @@ $(document).ready(function(){
 					var str_perprice = CommaFormatted(perprice.toString());
 					console.log(str_perprice);
 
-					var subtotal = perprice * quantity;
+					var price = perprice;
+					var subtotal = price * quantity;
                     var str_subtotal = CommaFormatted(subtotal.toString());
 
 
 					salecartData += `<tr> 
-											<td class="sale__cart__item">
-		                                        <img src="${photo}" alt="" class="img-fluid" style="width:120px; height:100px; object-fit:cover">
-		                                        <h5> ${name} </h5>
+											<td>
+		                                        <img src="${photo}" alt="" class="img-fluid" style="width:50px; height:50px; object-fit:cover">
+		                                        <h6> ${name} </h6>
 		                                    </td>`;
-						salecartData += `<td class="sale__cart__price">
-		                                        ${str_perprice} Ks
+						salecartData += `<td>
+		                                      ${str_perprice} Ks
 		                                    </td>`;
 					
-						salecartData += `<td class="sale__cart__quantity">
+						salecartData += `<td>
 		                                        <div class="quantity">
 		                                            <div class="pro-qty">
 		                                            	<a class="btn dec qtybtn" data-id="${i}">-</a>
@@ -131,24 +105,24 @@ $(document).ready(function(){
 				// console.log(total);
 				console.log(totality);
 
-				$('tbody').html(salecartData);
+				$('#salTable').html(salecartData);
 				$('.totality').html(CommaFormatted(totality.toString())+' Ks');
 
 
 			}
 			else{
-				$('.salecart_div').hide();
-				$('.nosalecart_div').show();
+				$('.mySaleList').hide();
+				$('.nosalelist').show();
 			}
 		}
 		else{
-			$('.salecart_div').hide();
-			$('.nosalecart_div').show();
+			$('.mySaleList').hide();
+			$('.nosalelist').show();
 		}
 	}
 
 	// Remove Item
-	$('tbody').on('click','.remove_btn', function()
+	$('#salTable').on('click','.remove_btn', function()
 	{
 		var id = $(this).data('id');
 
@@ -175,7 +149,7 @@ $(document).ready(function(){
 	});
 
 	// Add Quantity
-	$('tbody').on('click','.inc', function()
+	$('#salTable').on('click','.inc', function()
 	{
 		var id = $(this).data('id');
 
@@ -199,7 +173,7 @@ $(document).ready(function(){
 	});
 
 	// Sub Quantity
-	$('tbody').on('click','.dec', function()
+	$('#salTable').on('click','.dec', function()
 	{
 		var id = $(this).data('id');
 
@@ -221,11 +195,9 @@ $(document).ready(function(){
 		var saleData = JSON.stringify(saleArray);
 		localStorage.setItem('sale',saleData);
 		showTable();
-		cartNoti();
-
 	});
 
-	$('.checkoutBtn').click(function () {
+	/*$('.checkoutBtn').click(function () {
 
 		alert(error);
 	    var cart=localStorage.getItem("cart"); //string
@@ -244,7 +216,7 @@ $(document).ready(function(){
 			//localStorage.clear();
 			location.href="ordersuccess";
 		});
-	});
+	});*/
 
 	function CommaFormatted(amount) 
     {

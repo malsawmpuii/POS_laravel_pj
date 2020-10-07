@@ -20,7 +20,7 @@
     <div class="card-body">
        <div class="form-row">
             <div class="form-group col-md-12 ">
-                <img src="{{$stock->item->photo}}" alt="Item Photo" class="w-20">
+                <img src="{{$stock->item->photo}}" alt="Item Photo" class="img-fluid w-10">
             </div>
         </div>
          <div class="form-row">

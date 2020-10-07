@@ -26,8 +26,8 @@ class Item extends Model
   	return $this->belongsTo('App\Brand');
   }
 
-  public function stock()
+  public function stocks()
   {
-    return $this->belongsTo('App\Stock');
+    return $this->hasMany('App\Stock');
   }
 }

@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Auth::routes(['register' => false]);
 
-//Route::group(['middleware' => ['role:admin']], function () {
+Route::group(['middleware' => ['role:admin']], function () {
     //
     Route::get('/home', 'HomeController@index')->name('home');
 
@@ -38,16 +38,17 @@ Auth::routes(['register' => false]);
 
 	Route::post('getitem','StockController@getitem')->name('getitem');
 
-//});
+});
 
-//Route::group(['middleware' => ['role:staff']], function () {
-    //
-	Route::get('sale/item','MainController@index')->name('sale/item');
+Route::group(['middleware' => ['role:staff']], function () {
+    	
+    Route::get('salepage','SaleController@salepage')->name('salepage');
 
-	Route::get('brand/{id}','MainController@branddetail')->name('brand_detail');
+	Route::get('getallitem','SaleController@getallitem')->name('getallitem');
 
-	Route::get('category/{id}','MainController@categorydetail')->name('category_detail');
+	Route::post('byBrand','SaleController@byBrand')->name('byBrand');
 
-//});
+	Route::post('byCategory','SaleController@byCategory')->name('byCategory');
+
+});
 	
-	//Route::get('sale/item','PageController@index')->name('sale/item');
