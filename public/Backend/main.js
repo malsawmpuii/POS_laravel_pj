@@ -12,37 +12,37 @@ $(document).ready(function(){
 		var quantity = 1;
 
 		var mylist = {id:id, codeno:codeno,
-					name:name, photo:photo,
-					perprice:perprice,quantity:quantity};
+			name:name, photo:photo,
+			perprice:perprice,quantity:quantity};
 
-		console.log(mylist);
+			console.log(mylist);
 
-		var sale = localStorage.getItem('sale');
-		var saleArray;
+			var sale = localStorage.getItem('sale');
+			var saleArray;
 
-		if (sale==null) {
-			saleArray = Array();
-		}
-		else{
-			saleArray = JSON.parse(sale);
-		}
-
-		var status=false;
-
-		$.each(saleArray, function(i,v){
-			if (id == v.id) {
-				v.quantity++;
-				status = true;
+			if (sale==null) {
+				saleArray = Array();
 			}
+			else{
+				saleArray = JSON.parse(sale);
+			}
+
+			var status=false;
+
+			$.each(saleArray, function(i,v){
+				if (id == v.id) {
+					v.quantity++;
+					status = true;
+				}
+			});
+
+			if (!status) {
+				saleArray.push(mylist);
+			}
+
+			var saleData = JSON.stringify(saleArray);
+			localStorage.setItem("sale",saleData);
 		});
-
-		if (!status) {
-			saleArray.push(mylist);
-		}
-
-		var saleData = JSON.stringify(saleArray);
-		localStorage.setItem("sale",saleData);
-	});
 
 	function showTable(){
 		var sale = localStorage.getItem('sale');
@@ -70,35 +70,31 @@ $(document).ready(function(){
 
 					var price = perprice;
 					var subtotal = price * quantity;
-                    var str_subtotal = CommaFormatted(subtotal.toString());
+					var str_subtotal = CommaFormatted(subtotal.toString());
 
 
 					salecartData += `<tr> 
-											<td>
-		                                        <img src="${photo}" alt="" class="img-fluid" style="width:50px; height:50px; object-fit:cover">
-		                                        <h6> ${name} </h6>
-		                                    </td>`;
-						salecartData += `<td>
-		                                      ${str_perprice} Ks
-		                                    </td>`;
+					<td>
+					<img src="${photo}" alt="" class="img-fluid" style="width:50px; height:50px; object-fit:cover">
+					<h6> ${name} </h6>
+					</td>`;
+					salecartData += `<td>
+					${str_perprice} Ks
+					</td>`;
 					
-						salecartData += `<td>
-		                                        <div class="quantity">
-		                                            <div class="pro-qty">
-		                                            	<a class="btn dec qtybtn" data-id="${i}">-</a>
-		                                                ${quantity}
-		                                                <a class="btn inc qtybtn" data-id="${i}">+</a>
-		                                            </div>
-		                                        </div>
-		                                    </td>
-											<td class="sale__cart__total">
-		                                        ${str_subtotal} Ks
-		                                    </td>
-											
-		                                    <td class="sale__cart__item__close">
-		                                        <span class="icon_close remove_btn" data-id="${i}"></span>
-		                                    </td>
-		                                </tr>`;
+					salecartData += `<td>
+					<a class="btn dec qtybtn" data-id="${i}">-</a>
+					${quantity}
+					<a class="btn inc qtybtn" data-id="${i}">+</a> 
+					</td>
+					<td>
+					${str_subtotal} Ks
+					</td>
+					
+					<td>
+					<span class="icon_close remove_btn" data-id="${i}"></span>
+					</td>
+					</tr>`;
 					total += subtotal ++;
 				});
 				var totality = total;
@@ -144,7 +140,6 @@ $(document).ready(function(){
 		localStorage.setItem("sale",saleData);
 		
 		showTable();
-		cartNoti();
 
 	});
 
@@ -168,7 +163,6 @@ $(document).ready(function(){
 		var saleData = JSON.stringify(saleArray);
 		localStorage.setItem('sale',saleData);
 		showTable();
-		cartNoti();
 
 	});
 
@@ -197,43 +191,22 @@ $(document).ready(function(){
 		showTable();
 	});
 
-	/*$('.checkoutBtn').click(function () {
-
-		alert(error);
-	    var cart=localStorage.getItem("cart"); //string
-	    var note = $('#notes').val();  //get note from input
-
-	    $.ajaxSetup({
-	        headers: {
-	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-	        }
-	    });
-
-	    $.post('/order',{
-			data:cart,note:note 
-		},function(response){
-			alert('HEllo');
-			//localStorage.clear();
-			location.href="ordersuccess";
-		});
-	});*/
-
 	function CommaFormatted(amount) 
-    {
+	{
         var delimiter = ","; // replace comma if desired
         var a = amount.split('.',2)
         var i = parseInt(a[0]);
         
         if(isNaN(i)) 
         {
-            return ''; 
+        	return ''; 
         }
         
         var minus = '';
         
         if(i < 0) 
         {
-            minus = '-'; 
+        	minus = '-'; 
         }
         
         i = Math.abs(i);
@@ -242,14 +215,14 @@ $(document).ready(function(){
         var a = [];
         
         while(n.length > 3) {
-            var nn = n.substr(n.length-3);
-            a.unshift(nn);
-            n = n.substr(0,n.length-3);
+        	var nn = n.substr(n.length-3);
+        	a.unshift(nn);
+        	n = n.substr(0,n.length-3);
         }
 
         if(n.length > 0) 
         { 
-            a.unshift(n); 
+        	a.unshift(n); 
         }
         n = a.join(delimiter);
 

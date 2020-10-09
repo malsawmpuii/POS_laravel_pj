@@ -39,7 +39,7 @@ class StockController extends Controller
     public function store(Request $request)
     {
          //validation
-       /* $request->validate([
+        $request->validate([
             "item_id"=>"required",
             "perprice"=>"required",
             "quantity"=>"required",
@@ -50,9 +50,9 @@ class StockController extends Controller
          $stock->item_id =$request->item_id;
          $stock->perprice=$request->perprice;
          $stock->quantity=$request->quantity;
-         $stock->in_date=$request->date;*/
+         $stock->in_date=$request->date;
 
-        $stock = Stock::where([
+        /*$stock = Stock::where([
         ['item_id', '=', $request->item_id]
         ])->first();
          
@@ -64,7 +64,7 @@ class StockController extends Controller
             $stock->increment('quantity', $request->quantity);
         } else {
             Stock::create($request->all());
-        }
+        }*/
          $stock->save();
 
          return redirect()->route('stock.index');

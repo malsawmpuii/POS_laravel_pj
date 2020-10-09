@@ -41,15 +41,15 @@
 						<td>{{$supplier->phoneno}}</td>
 						<td>{{$supplier->address}}</td>
 						<td>
-							<a href="{{route('supplier.show',$supplier->id)}}" class="btn btn-primary"><i class="fas fa-eye"></i>Detail</a>
+							<a href="{{route('supplier.show',$supplier->id)}}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
 							<a href="{{route('supplier.edit',$supplier->id)}}" class="btn btn-warning">
-								<i class="fas fa-tools"></i>Edit
+								<i class="fas fa-wrench"></i>
 							</a>
 							<form action="{{route('supplier.destroy',$supplier->id)}}" method="POST" class="d-inline-block" onsubmit="return confirm('Are you sure?')">
 								@csrf
 								@method('DELETE')
 								<button class="btn btn-outline-danger">
-									<i class="fas fa-trash-alt"></i>Delete
+									<i class="fas fa-trash-alt"></i>
 								</button>
 							</form>
 						</td>

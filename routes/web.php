@@ -50,5 +50,9 @@ Route::group(['middleware' => ['role:staff']], function () {
 
 	Route::post('byCategory','SaleController@byCategory')->name('byCategory');
 
+	Route::post('sale','SaleController@sale')->name('sale');
+	
+	Route::get('salesuccess','SaleController@salesuccess')->name('salesuccess');
+
 });
 	

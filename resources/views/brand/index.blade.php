@@ -39,7 +39,7 @@
                 {{$name}}
               </td>
               <td>
-                <a href="{{route('brand.show',$brand->id)}}" class="btn btn-primary"><i class="fas fa-eye"></i>Detail</a>
+                <a href="{{route('brand.show',$brand->id)}}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
                 <a href="{{route('brand.edit',$brand->id)}}" class="btn btn-warning">
                   <i class="fas fa-wrench"></i>
                 </a>
@@ -47,7 +47,7 @@
                   @csrf
                   @method('DELETE')
                   <button class="btn btn-outline-danger">
-                    <i class="fas fa-trash-alt"></i>Delete
+                    <i class="fas fa-trash-alt"></i>
                   </button>
                 </form>
               </td>

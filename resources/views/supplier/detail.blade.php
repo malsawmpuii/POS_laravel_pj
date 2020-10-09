@@ -9,7 +9,7 @@
     <div class="card-body">
         <div class="form-row">
             <div class="form-group col-md-12 ">
-                <img src="{{$supplier->logo}}" alt="Supplier Photo" class="w-50">
+                <img src="{{$supplier->logo}}" alt="Supplier Photo" class="img-fluid w-50">
             </div>
         </div>
 

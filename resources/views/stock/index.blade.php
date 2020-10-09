@@ -43,7 +43,7 @@
               <td>{{$row->quantity}}</td>
               <td>{{$row->in_date}}</td>
               <td>
-                <a href="{{route('stock.show',$row->id)}}" class="btn btn-primary"><i class="fas fa-eye"></i>Detail</a>
+                <a href="{{route('stock.show',$row->id)}}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
                 {{-- <a href="{{route('stock.edit',$row->id)}}" class="btn btn-warning">
                   <i class="fas fa-tools">Edit</i>
                 </a> --}}

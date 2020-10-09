@@ -30,4 +30,10 @@ class Item extends Model
   {
     return $this->hasMany('App\Stock');
   }
+
+  public function sales(){
+      return $this->belongsToMany('App\Sale','sale_details','sale_id','item_id')
+      ->withPivot('qty')
+      ->withTimestamps();
+    }
 }
